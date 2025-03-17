@@ -1,19 +1,20 @@
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import Main from "./pages/Main";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
 import Play from "./pages/Play";
+import NavBar from "./components/NavBar";
 
 function App() {
   return (
     <Router>
-      <nav style={{fontSize : '20px'}}>
-        <Link to="/">홈</Link> | 
-        <Link to="/play">소개</Link>
-      </nav>
+      <NavBar></NavBar>
 
-      <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/play" element={<Play />} />
-      </Routes>
+      <main>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/play" element={<Play />} />
+        </Routes>
+      </main>
+      
     </Router>
   );
 }
