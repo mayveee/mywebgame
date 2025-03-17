@@ -1,0 +1,45 @@
+.clicker-container {
+    display: flex;
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center;
+    height: 100vh; 
+    text-align: center;
+    user-select: none;
+}
+
+.emoji {
+    font-size: 150px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+@keyframes shake {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(-15deg); }
+    50% { transform: rotate(15deg); }
+    75% { transform: rotate(-15deg); }
+    100% { transform: rotate(0deg); }
+}
+
+.shake {
+    animation: shake 0.2s ease-in-out;
+}
+
+.fireworks {
+    font-size: 80px;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: explode 1s ease-out infinite alternate;
+}
+
+@keyframes explode {
+    0% { transform: scale(0.5) translateX(-50%); opacity: 0.7; }
+    100% { transform: scale(1.5) translateX(-50%); opacity: 1; }
+}
+
+.count-text {
+    font-size: 100px;
+}
