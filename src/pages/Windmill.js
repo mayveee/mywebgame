@@ -29,7 +29,19 @@ function Windmill() {
         <div className="windmill-container">
 
             <TbWindmillFilled ref={windmillRef} className={`windmill ${speed === 0? "stop" : ""}`} />
-            
+
+            <div className="wind-animation">
+                {Array.from({ length: speed }).map((_, i) => (
+                    <div key={i} className="wind-particle top" style={{ animationDuration: `${1.5 - speed * 0.2}s` }} />
+                ))}
+                {Array.from({ length: speed }).map((_, i) => (
+                    <div key={i} className="wind-particle middle" style={{ animationDuration: `${2.3 - speed * 0.5}s` }} />
+                ))}
+                {Array.from({ length: speed }).map((_, i) => (
+                    <div key={i} className="wind-particle bottom" style={{ animationDuration: `${1.5 - speed * 0.2}s` }} />
+                ))}
+            </div>
+
             <div className="controls">
                 <p className="icon" onClick={decreaseSpeed}>🔻 </p>            
                 <p className="speed-display">{speed}</p>
