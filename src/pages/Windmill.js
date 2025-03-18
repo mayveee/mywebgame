@@ -5,17 +5,38 @@ import { TbWindmillFilled } from "react-icons/tb";
 function Windmill() {
     const [speed, setSpeed] = useState(0);
     const windmillRef = useRef(null);
+    const animationRef = useRef(null);
+    const lastTimeRef = useRef(0);
+    const angleRef = useRef(0);
 
     useEffect(() => {
-        if (windmillRef.current) {
-            if(speed === 0){
-                windmillRef.current.style.animationPlayState = "paused";
-            } else{
-                windmillRef.current.style.animationPlayState = "running";
-                windmillRef.current.style.animationDuration = `${6-speed}s`;
+        const animate = (timestamp) => {
+            if (!lastTimeRef.current) {
+                lastTimeRef.current = timestamp;
             }
+            const deltaTime = (timestamp - lastTimeRef.current) / 1000;
+            lastTimeRef.current = timestamp;
+
+            const rotationSpeed = speed * 100;
+            angleRef.current += rotationSpeed * deltaTime;
+            angleRef.current %= 360;
+            console.log(angleRef.current);
+            if (windmillRef.current) {
+                windmillRef.current.style.transform = `rotate(${angleRef.current}deg)`;
+            }
+
+            animationRef.current = requestAnimationFrame(animate);
+        };
+
+        if (speed > 0) {
+            animationRef.current = requestAnimationFrame(animate);
+        } else {
+            cancelAnimationFrame(animationRef.current);
+            lastTimeRef.current = 0;
         }
-    })
+
+        return () => cancelAnimationFrame(animationRef.current);
+    }, [speed]);
 
     const increaseSpeed = () => {
         if (speed < 5) setSpeed(speed + 1);
@@ -28,7 +49,7 @@ function Windmill() {
     return (
         <div className="windmill-container">
 
-            <TbWindmillFilled ref={windmillRef} className={`windmill ${speed === 0? "stop" : ""}`} />
+            <TbWindmillFilled ref={windmillRef} className="windmill" />
 
             <div className="wind-animation">
                 {Array.from({ length: speed }).map((_, i) => (
