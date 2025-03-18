@@ -5,6 +5,7 @@
     justify-content: center;
     height: 100vh;
     user-select: none;
+    overflow-x: hidden;
 }
 
 .windmill {
@@ -12,6 +13,7 @@
     animation: spin linear infinite;
     color: rgb(87, 163, 255);
     margin-bottom: 50px;
+    z-index: 10;
 }
 
 .windmill.stop {
@@ -27,6 +29,7 @@
 .controls {
     display: flex;
     flex-direction: row;
+    justify-content: center;
     align-items: center;
     margin-top: 50px 0;
 }
@@ -34,15 +37,62 @@
 .speed-display {
     font-size: 50px;
     font-weight: bold;
+    min-width: 30px;
     margin: 0 10px;
 }
 
 .icon {
     font-size: 50px;
     cursor: pointer;
-    margin: 0 70px;
+    margin: 0 25px;
 }
 
 .icon:hover {
     opacity: 0.8;
+}
+
+.wind-particle {
+    position: absolute;
+    left: 10%;
+    background-color: rgba(94, 159, 233, 0.8);
+    border-radius: 50%;
+    opacity: 1;
+    animation: wind-move linear infinite;
+    z-index: 1;
+    mix-blend-mode: soft-light;
+}
+
+.wind-particle.top {
+    top: 20%;
+}
+
+.wind-particle.middle {
+    top: 40%
+}
+
+.wind-particle.bottom {
+    top: 65%
+}
+
+.wind-particle:nth-child(odd) {
+    width: 15px;
+    height: 15px;
+    animation-duration: 3.5s;
+}
+
+.wind-particle:nth-child(even) {
+    width: 10px;
+    height: 10px;
+    animation-duration: 2s;
+}
+
+@keyframes wind-move {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(80vw, 0px) scale(0.5);
+        opacity: 0.3;
+    }
 }
