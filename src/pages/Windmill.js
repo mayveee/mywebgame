@@ -1,6 +1,7 @@
 import { useState , useRef, useEffect} from "react";
 import "./Windmill.css";
 import { TbWindmillFilled } from "react-icons/tb";
+import { motion } from "framer-motion";
 
 function Windmill() {
     const [speed, setSpeed] = useState(0);
@@ -47,7 +48,13 @@ function Windmill() {
     };
 
     return (
-        <div className="windmill-container">
+        <motion.div 
+            className="windmill-container"
+            initial={{ y: 10, opacity: 0}}
+            animate={{ y: 0, opacity: 1}}
+            exit={{ y: -10, opacity: 0 }}
+            transition={{ duration : 0.3 }}
+            >
 
             <TbWindmillFilled ref={windmillRef} className="windmill" />
 
@@ -68,7 +75,7 @@ function Windmill() {
                 <p className="speed-display">{speed}</p>
                 <p className="icon" onClick={increaseSpeed}>🔺 </p>
             </div>
-        </div>
+        </motion.div>
     );
 }
 
