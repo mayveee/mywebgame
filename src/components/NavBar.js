@@ -2,6 +2,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { FaHome } from "react-icons/fa";
 import { TbHandClick } from "react-icons/tb";
 import { PiWindmillBold } from "react-icons/pi";
+
 import "./NavBar.css";
 
 function NavBar() {
