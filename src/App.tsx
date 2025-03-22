@@ -5,20 +5,18 @@ import NavBar from "./components/NavBar";
 import Clicker from "./pages/Clicker";
 import "./App.css";
 
-function App() {
+const App = (): React.JSX.Element => {
   return (
     <Router>
-      <NavBar></NavBar>
+      <NavBar />
 
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/windmill" element={<Windmill />} />
         <Route path="/clicker" element={<Clicker />} />
       </Routes>
-
-      
     </Router>
   );
-}
+};
 
 export default App;

@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-export default function Home() {
+ const Home = (): React.JSX.Element => {
     return (
       <motion.h1 
         style={{marginLeft : "10px", marginTop : "60px"}}
@@ -13,4 +13,6 @@ export default function Home() {
       </motion.h1>
     );
   }
+
+  export default Home;
   

@@ -8,11 +8,17 @@
     overflow-x: hidden;
 }
 
+.windmillSpan {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    transform-origin: center;
+}
+
 .windmill {
     font-size: 500px;
     animation: spin linear infinite;
     color: rgb(87, 163, 255);
-    margin-bottom: 50px;
     z-index: 10;
 }
 

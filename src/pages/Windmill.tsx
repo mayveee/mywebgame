@@ -1,17 +1,17 @@
-import { useState , useRef, useEffect} from "react";
+import React, { useState , useRef, useEffect} from "react";
 import "./Windmill.css";
 import { TbWindmillFilled } from "react-icons/tb";
 import { motion } from "framer-motion";
 
-function Windmill() {
-    const [speed, setSpeed] = useState(0);
-    const windmillRef = useRef(null);
-    const animationRef = useRef(null);
-    const lastTimeRef = useRef(0);
-    const angleRef = useRef(0);
+const Windmill = (): React.JSX.Element => {
+    const [speed, setSpeed] = useState<number>(0);
+    const windmillRef = useRef<HTMLElement>(null);
+    const animationRef = useRef<number>(null);
+    const lastTimeRef = useRef<number>(0);
+    const angleRef = useRef<number>(0);
 
     useEffect(() => {
-        const animate = (timestamp) => {
+        const animate = (timestamp: number) => {
             if (!lastTimeRef.current) {
                 lastTimeRef.current = timestamp;
             }
@@ -32,18 +32,24 @@ function Windmill() {
         if (speed > 0) {
             animationRef.current = requestAnimationFrame(animate);
         } else {
-            cancelAnimationFrame(animationRef.current);
+            if(animationRef.current !== null){
+                cancelAnimationFrame(animationRef.current);
+            }
             lastTimeRef.current = 0;
         }
 
-        return () => cancelAnimationFrame(animationRef.current);
+        return () => {
+            if(animationRef.current !== null){
+                cancelAnimationFrame(animationRef.current);
+            }
+        }
     }, [speed]);
 
-    const increaseSpeed = () => {
+    const increaseSpeed = (): void => {
         if (speed < 5) setSpeed(speed + 1);
     };
 
-    const decreaseSpeed = () => {
+    const decreaseSpeed = (): void => {
         if (speed > 0) setSpeed(speed - 1);
     };
 
@@ -55,8 +61,10 @@ function Windmill() {
             exit={{ y: -10, opacity: 0 }}
             transition={{ duration : 0.3 }}
             >
-
-            <TbWindmillFilled ref={windmillRef} className="windmill" />
+            
+            <span ref={windmillRef} className="windmillSpan">
+                <TbWindmillFilled className="windmill" />
+            </span>
 
             <div className="wind-animation">
                 {Array.from({ length: speed }).map((_, i) => (

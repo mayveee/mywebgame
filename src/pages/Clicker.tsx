@@ -4,14 +4,14 @@ import { RiResetLeftLine } from "react-icons/ri";
 import { motion } from "framer-motion";
 
 
-function Clicker() {
-    const [count, setCount] = useState(100);
-    const [isShaking, setIsShaking] = useState(false);
-    const [target, setTarget] = useState('🥚');
-    const [showFirework, setShowFirework] = useState(false);
-    const [isGameFinished, setIsGameFinished] = useState(false);
+const Clicker= (): React.JSX.Element => {
+    const [count, setCount] = useState<number>(100);
+    const [isShaking, setIsShaking] = useState<boolean>(false);
+    const [target, setTarget] = useState<string>('🥚');
+    const [showFirework, setShowFirework] = useState<boolean>(false);
+    const [isGameFinished, setIsGameFinished] = useState<boolean>(false);
 
-    const decreaseCount = () => {
+    const decreaseCount = (): void => {
         setCount((prevCount) => {
             if (prevCount === 1) {
                 setTarget('🐤');
@@ -25,7 +25,7 @@ function Clicker() {
         setTimeout(() => { setIsShaking(false); }, 200);
     };
 
-    const resetGame = () => {
+    const resetGame = (): void => {
         setTarget('🥚');
         setCount(100);
         setShowFirework(false);
@@ -50,9 +50,9 @@ function Clicker() {
         )}
 
         <p 
-            onClick={count===0? null : decreaseCount}
+            onClick={count===0? undefined : decreaseCount}
             className={`emoji ${isShaking? "shake" : ""}`}
-            > 
+        > 
             {target}
         </p>
 
