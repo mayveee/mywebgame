@@ -12,5 +12,4 @@ root.render(
   </React.StrictMode>
 );
 
-// CRA 기본 성능 측정 함수
 reportWebVitals();
