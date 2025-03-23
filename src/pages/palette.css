@@ -1,0 +1,62 @@
+.palette-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+  
+.circle {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+  
+.circle:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+  
+.sub-circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transition:
+      transform 0.4s ease,
+      opacity 0.4s ease;
+}
+
+.sub-circle.expanding {
+    animation: expandAndFade 0.8s ease-out forwards;
+    z-index: 1;
+}
+  
+@keyframes expandAndFade {
+    0% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(12);
+      opacity: 1;
+    }
+}
+  
+.sub-circle.visible {
+    opacity: 1;
+}
+
+.sub-circle.visible:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+}
+
