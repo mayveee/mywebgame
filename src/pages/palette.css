@@ -42,12 +42,14 @@
   
 @keyframes expandAndFade {
     0% {
-      transform: translate(-50%, -50%) scale(1);
-      opacity: 1;
+        width: 15vw;
+        height: 15vw;
+        opacity: 1;
     }
     100% {
-      transform: translate(-50%, -50%) scale(12);
-      opacity: 1;
+        width: 300vw;
+        height: 300vw;
+        opacity: 1;
     }
 }
   
