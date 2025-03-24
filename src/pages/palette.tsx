@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './palette.css';
+import { motion } from "framer-motion";
 
 const Palette = () : React.JSX.Element => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -45,19 +46,18 @@ const Palette = () : React.JSX.Element => {
     const subCircles = Array.from({ length: 6 }, (_, i) => {
         const angleDeg = i * 60;
         const angleRad = (angleDeg * Math.PI) / 180;
-        const radius = 120;
-        const distance = 1.8;
-        const x = Math.cos(angleRad) * radius * distance;
-        const y = Math.sin(angleRad) * radius * distance;
+        const distance = 17;
+        const x = Math.cos(angleRad) * distance;
+        const y = Math.sin(angleRad) * distance;
 
         return (
             <div
             key={i}
             className={`sub-circle ${isOpen ? 'visible' : ''} ${i === animationIndex ? 'expanding' : ''}`}
-            onClick={() => {changeColor(i)}}
+            onClick={animationIndex === null? () => changeColor(i) : undefined}
             style={{
                 transform: isOpen
-                ? `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`
+                ? `translate(calc(-50% + ${x}vw), calc(-50% + ${y}vw))`
                 : 'translate(-50%, -50%)',
                 backgroundColor: animationIndex === i && animationColor
                 ? animationColor
@@ -68,13 +68,20 @@ const Palette = () : React.JSX.Element => {
     });
 
     return (
-        <div className="palette-container" style={{ backgroundColor : bgColor }}>
+        <motion.div 
+         className="palette-container"
+         style={{ backgroundColor : bgColor}}
+         initial={{ opacity: 0}}
+         animate={{ opacity: 1}}
+         exit={{ opacity: 0 }}
+         transition={{ duration : 0.5 }}   
+        >
             {subCircles}
             <div 
             className="circle" 
             onClick={animationIndex === null? togglePalette : undefined} 
             style={{ backgroundColor : centerColor }}/>
-        </div>
+        </motion.div>
     );
 };
 
